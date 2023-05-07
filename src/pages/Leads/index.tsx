@@ -8,7 +8,6 @@ import { FiCamera, FiLink, FiArrowUpCircle } from 'react-icons/fi';
 import moment from 'moment';
 import MenuHeader from '../../components/MenuHeader';
 import { Container, Content, HeaderPage, AvatarInput } from './styles';
-import Button from '../../components/Button';
 import api from '../../services/api';
 import { Lead } from '../../types/Lead';
 import { useToast } from '../../hooks/toast';
@@ -39,7 +38,7 @@ const Leads: React.FC = () => {
       if (files) {
         data.append('file', files[0]);
 
-        api.patch(`/leads/${lead_id}/proofofresidence`, data).then(response => {
+        api.patch(`/leads/${lead_id}/proofofresidence`, data).then(() => {
           addToast({
             type: 'success',
             title: 'Comprovante de Residência alterado!',
@@ -52,7 +51,7 @@ const Leads: React.FC = () => {
 
   const retryDocument = useCallback(
     lead_id => {
-      api.post(`/leads/${lead_id}/retry`).then(response => {
+      api.post(`/leads/${lead_id}/retry`).then(() => {
         addToast({
           type: 'success',
           title: 'Novo documento criado!',

@@ -14,7 +14,7 @@ import Button from '../../components/Button';
 
 import api from '../../services/api';
 
-import { Container, Content, AnimationContainer, Background } from './styles';
+import { Container, Content, AnimationContainer } from './styles';
 
 interface ResetPasswordFormData {
   password: string;
