@@ -152,19 +152,17 @@ const Leads: React.FC = () => {
                     <FiArrowUpCircle onClick={() => retryDocument(lead?.id)} />
                   </td>
                   <td>
-                    {!lead.proof_of_residence_name && (
-                      <AvatarInput>
-                        <label htmlFor={`avatar${lead.id}`}>
-                          <FiCamera />
-                          <input
-                            id={`avatar${lead.id}`}
-                            type="file"
-                            data-lead_id={lead.id}
-                            onChange={handleProofOfResidence}
-                          />
-                        </label>
-                      </AvatarInput>
-                    )}
+                    <AvatarInput>
+                      <label htmlFor={`avatar${lead.id}`}>
+                        <FiCamera />
+                        <input
+                          id={`avatar${lead.id}`}
+                          type="file"
+                          data-lead_id={lead.id}
+                          onChange={handleProofOfResidence}
+                        />
+                      </label>
+                    </AvatarInput>
                   </td>
                 </tr>
               );
