@@ -4,7 +4,7 @@ import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import 'react-day-picker/lib/style.css';
 
 import { Link } from 'react-router-dom';
-import { FiCamera, FiLink, FiArrowUpCircle } from 'react-icons/fi';
+import { FiUpload, FiLink, FiArrowUpCircle } from 'react-icons/fi';
 import moment from 'moment';
 import MenuHeader from '../../components/MenuHeader';
 import { Container, Content, HeaderPage, AvatarInput } from './styles';
@@ -49,6 +49,27 @@ const Leads: React.FC = () => {
     [addToast],
   );
 
+  const handleProofOfIdentity = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const data = new FormData();
+
+      const { files } = e.target;
+      const lead_id = e.target.getAttribute('data-lead_id');
+
+      if (files) {
+        data.append('file', files[0]);
+
+        api.patch(`/leads/${lead_id}/proofofidentity`, data).then(() => {
+          addToast({
+            type: 'success',
+            title: 'Comprovante de Identidade alterado!',
+          });
+        });
+      }
+    },
+    [addToast],
+  );
+
   const retryDocument = useCallback(
     lead_id => {
       api.post(`/leads/${lead_id}/retry`).then(() => {
@@ -80,6 +101,7 @@ const Leads: React.FC = () => {
               <th>Nome</th>
               <th>Contrato Assinado</th>
               <th>Comprovante de Residência</th>
+              <th>Comprovante de Identidade</th>
               <th>Created At</th>
               <th>Acessar RD</th>
               <th>Solicitar Assinatura</th>
@@ -127,7 +149,46 @@ const Leads: React.FC = () => {
                         {lead.proof_of_residence_name}
                       </Link>
                     ) : (
-                      '-'
+                      <AvatarInput>
+                        <label htmlFor={`avatar${lead.id}`}>
+                          <FiUpload />
+                          <input
+                            id={`avatar${lead.id}`}
+                            type="file"
+                            data-lead_id={lead.id}
+                            onChange={handleProofOfResidence}
+                          />
+                        </label>
+                      </AvatarInput>
+                    )}
+                  </td>
+                  <td>
+                    {lead.proof_of_identity_name ? (
+                      <Link
+                        style={{
+                          textDecoration: 'none',
+                          fontWeight: 600,
+                          color: '#ff9000',
+                        }}
+                        target="_blank"
+                        to={{
+                          pathname: `${process.env.REACT_APP_BUCKET_S3_URL}/${lead.proof_of_residence_name}`,
+                        }}
+                      >
+                        {lead.proof_of_residence_name}
+                      </Link>
+                    ) : (
+                      <AvatarInput>
+                        <label htmlFor={`avatar${lead.id}`}>
+                          <FiUpload />
+                          <input
+                            id={`avatar${lead.id}`}
+                            type="file"
+                            data-lead_id={lead.id}
+                            onChange={handleProofOfIdentity}
+                          />
+                        </label>
+                      </AvatarInput>
                     )}
                   </td>
                   <td className="column2">
@@ -150,19 +211,6 @@ const Leads: React.FC = () => {
                   </td>
                   <td>
                     <FiArrowUpCircle onClick={() => retryDocument(lead?.id)} />
-                  </td>
-                  <td>
-                    <AvatarInput>
-                      <label htmlFor={`avatar${lead.id}`}>
-                        <FiCamera />
-                        <input
-                          id={`avatar${lead.id}`}
-                          type="file"
-                          data-lead_id={lead.id}
-                          onChange={handleProofOfResidence}
-                        />
-                      </label>
-                    </AvatarInput>
                   </td>
                 </tr>
               );

@@ -188,6 +188,9 @@ export const Content = styled.main`
 
 export const AvatarInput = styled.div`
   align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   label {
     width: 32px;
