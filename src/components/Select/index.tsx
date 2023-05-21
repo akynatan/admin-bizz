@@ -70,14 +70,13 @@ const Select: React.FC<SelectProps> = ({
         return '';
       },
       setValue: (ref: any, value: any) => {
-        console.log(value);
         ref.setValue(value);
         return value;
       },
     });
 
     defaultValue && selectRef?.current?.setValue(defaultValue);
-  }, [fieldName, defaultValue, registerField]);
+  }, [fieldName, isMulti, defaultValue, registerField]);
 
   const styles: StylesConfig = {
     option: (provided, state) => {
