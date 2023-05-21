@@ -55,21 +55,28 @@ const Select: React.FC<SelectProps> = ({
   }, []);
 
   useEffect(() => {
-    defaultValue && selectRef?.current?.setValue(defaultValue);
-
     registerField({
       name: fieldName,
       ref: selectRef.current,
       path: undefined,
       getValue: (ref: any) => {
-        if (ref.state.selectValue.length) return ref.state.selectValue[0].value;
+        if (ref.state.selectValue.length) {
+          if (isMulti) {
+            return ref.state.selectValue.map((sel: any) => sel.value);
+          }
+
+          return ref.state.selectValue[0].value;
+        }
         return '';
       },
       setValue: (ref: any, value: any) => {
+        console.log(value);
         ref.setValue(value);
         return value;
       },
     });
+
+    defaultValue && selectRef?.current?.setValue(defaultValue);
   }, [fieldName, defaultValue, registerField]);
 
   const styles: StylesConfig = {
