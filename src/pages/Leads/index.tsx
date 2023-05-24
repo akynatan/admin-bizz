@@ -150,10 +150,10 @@ const Leads: React.FC = () => {
                       </Link>
                     )}
                     <AvatarInput>
-                      <label htmlFor={`avatar${lead.id}`}>
+                      <label htmlFor={`proofOfResidence${lead.id}`}>
                         <FiUpload />
                         <input
-                          id={`avatar${lead.id}`}
+                          id={`proofOfResidence${lead.id}`}
                           type="file"
                           data-lead_id={lead.id}
                           onChange={handleProofOfResidence}
@@ -178,10 +178,10 @@ const Leads: React.FC = () => {
                       </Link>
                     )}
                     <AvatarInput>
-                      <label htmlFor={`avatar${lead.id}`}>
+                      <label htmlFor={`proofOfIdentity${lead.id}`}>
                         <FiUpload />
                         <input
-                          id={`avatar${lead.id}`}
+                          id={`proofOfIdentity${lead.id}`}
                           type="file"
                           data-lead_id={lead.id}
                           onChange={handleProofOfIdentity}
