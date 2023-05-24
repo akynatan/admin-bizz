@@ -171,10 +171,10 @@ const Leads: React.FC = () => {
                         }}
                         target="_blank"
                         to={{
-                          pathname: `${process.env.REACT_APP_BUCKET_S3_URL}/${lead.proof_of_residence_name}`,
+                          pathname: `${process.env.REACT_APP_BUCKET_S3_URL}/${lead.proof_of_identity_name}`,
                         }}
                       >
-                        {lead.proof_of_residence_name}
+                        {lead.proof_of_identity_name}
                       </Link>
                     )}
                     <AvatarInput>
