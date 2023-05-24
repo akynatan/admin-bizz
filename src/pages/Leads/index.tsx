@@ -134,7 +134,7 @@ const Leads: React.FC = () => {
                     )}
                   </td>
                   <td>
-                    {lead.proof_of_residence_name ? (
+                    {lead.proof_of_residence_name && (
                       <Link
                         style={{
                           textDecoration: 'none',
@@ -148,22 +148,21 @@ const Leads: React.FC = () => {
                       >
                         {lead.proof_of_residence_name}
                       </Link>
-                    ) : (
-                      <AvatarInput>
-                        <label htmlFor={`avatar${lead.id}`}>
-                          <FiUpload />
-                          <input
-                            id={`avatar${lead.id}`}
-                            type="file"
-                            data-lead_id={lead.id}
-                            onChange={handleProofOfResidence}
-                          />
-                        </label>
-                      </AvatarInput>
                     )}
+                    <AvatarInput>
+                      <label htmlFor={`avatar${lead.id}`}>
+                        <FiUpload />
+                        <input
+                          id={`avatar${lead.id}`}
+                          type="file"
+                          data-lead_id={lead.id}
+                          onChange={handleProofOfResidence}
+                        />
+                      </label>
+                    </AvatarInput>
                   </td>
                   <td>
-                    {lead.proof_of_identity_name ? (
+                    {lead.proof_of_identity_name && (
                       <Link
                         style={{
                           textDecoration: 'none',
@@ -177,19 +176,18 @@ const Leads: React.FC = () => {
                       >
                         {lead.proof_of_residence_name}
                       </Link>
-                    ) : (
-                      <AvatarInput>
-                        <label htmlFor={`avatar${lead.id}`}>
-                          <FiUpload />
-                          <input
-                            id={`avatar${lead.id}`}
-                            type="file"
-                            data-lead_id={lead.id}
-                            onChange={handleProofOfIdentity}
-                          />
-                        </label>
-                      </AvatarInput>
                     )}
+                    <AvatarInput>
+                      <label htmlFor={`avatar${lead.id}`}>
+                        <FiUpload />
+                        <input
+                          id={`avatar${lead.id}`}
+                          type="file"
+                          data-lead_id={lead.id}
+                          onChange={handleProofOfIdentity}
+                        />
+                      </label>
+                    </AvatarInput>
                   </td>
                   <td className="column2">
                     {moment(lead.created_at).format('DD/MM/YYYY HH:mm:SS')}
