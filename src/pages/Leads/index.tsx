@@ -128,10 +128,13 @@ const Leads: React.FC = () => {
                   <td className="column2">{lead.id}</td>
                   <td className="column1">{lead.name}</td>
                   <td className="column1">
-                    {lead.card_id ? lead.card_id : '-'}
-                    <FiArrowUpCircle
-                      onClick={() => createCardHubSoft(lead?.id)}
-                    />
+                    {lead.card_id ? (
+                      lead.card_id
+                    ) : (
+                      <FiArrowUpCircle
+                        onClick={() => createCardHubSoft(lead?.id)}
+                      />
+                    )}
                   </td>
                   <td>
                     {lead.document_name ? (
