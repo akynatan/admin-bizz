@@ -72,6 +72,18 @@ const Leads: React.FC = () => {
 
   const retryDocument = useCallback(
     lead_id => {
+      api.post(`/leads/${lead_id}/create`).then(() => {
+        addToast({
+          type: 'success',
+          title: 'Novo documento criado!',
+        });
+      });
+    },
+    [addToast],
+  );
+
+  const createCardHubSoft = useCallback(
+    lead_id => {
       api.post(`/leads/${lead_id}/createcardhub`).then(() => {
         addToast({
           type: 'success',
@@ -117,7 +129,9 @@ const Leads: React.FC = () => {
                   <td className="column1">{lead.name}</td>
                   <td className="column1">
                     {lead.card_id ? lead.card_id : '-'}
-                    <FiArrowUpCircle onClick={() => retryDocument(lead?.id)} />
+                    <FiArrowUpCircle
+                      onClick={() => createCardHubSoft(lead?.id)}
+                    />
                   </td>
                   <td>
                     {lead.document_name ? (
