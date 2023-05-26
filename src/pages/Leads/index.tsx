@@ -72,10 +72,10 @@ const Leads: React.FC = () => {
 
   const retryDocument = useCallback(
     lead_id => {
-      api.post(`/leads/${lead_id}/retry`).then(() => {
+      api.post(`/leads/${lead_id}/createcardhub`).then(() => {
         addToast({
           type: 'success',
-          title: 'Novo documento criado!',
+          title: 'CardID criado com sucesso!',
         });
       });
     },
@@ -99,6 +99,7 @@ const Leads: React.FC = () => {
             <tr className="table100-head">
               <th>ID</th>
               <th>Nome</th>
+              <th>Card HubSoft</th>
               <th>Contrato Assinado</th>
               <th>Comprovante de Residência</th>
               <th>Comprovante de Identidade</th>
@@ -114,6 +115,10 @@ const Leads: React.FC = () => {
                 <tr key={lead.id}>
                   <td className="column2">{lead.id}</td>
                   <td className="column1">{lead.name}</td>
+                  <td className="column1">
+                    {lead.card_id ? lead.card_id : '-'}
+                    <FiArrowUpCircle onClick={() => retryDocument(lead?.id)} />
+                  </td>
                   <td>
                     {lead.document_name ? (
                       <Link
