@@ -6,16 +6,19 @@ import 'react-day-picker/lib/style.css';
 import { Link } from 'react-router-dom';
 import { FiUpload, FiLink, FiArrowUpCircle } from 'react-icons/fi';
 import moment from 'moment';
+
 import MenuHeader from '../../components/MenuHeader';
 import { Container, Content, HeaderPage, AvatarInput } from './styles';
 import api from '../../services/api';
 import { Lead } from '../../types/Lead';
 import { useToast } from '../../hooks/toast';
+import { useAuth } from '../../hooks/auth';
 
 const Leads: React.FC = () => {
   const { addToast } = useToast();
   const [isFetching, setIsFetching] = useState(true);
   const [leads, setLeads] = useState<Lead[]>([]);
+  const { user } = useAuth();
 
   useEffect(() => {
     api
@@ -117,7 +120,8 @@ const Leads: React.FC = () => {
               <th>Comprovante de Identidade</th>
               <th>Created At</th>
               <th>Acessar RD</th>
-              <th>Solicitar Assinatura</th>
+              {user.role === 'admin' ||
+                (user.role === 'manager' && <th>Solicitar Assinatura</th>)}
               <th> </th>
             </tr>
           </thead>
@@ -229,9 +233,14 @@ const Leads: React.FC = () => {
                       <FiLink />
                     </Link>
                   </td>
-                  <td>
-                    <FiArrowUpCircle onClick={() => retryDocument(lead?.id)} />
-                  </td>
+                  {user.role === 'admin' ||
+                    (user.role === 'manager' && (
+                      <td>
+                        <FiArrowUpCircle
+                          onClick={() => retryDocument(lead?.id)}
+                        />
+                      </td>
+                    ))}
                 </tr>
               );
             })}
