@@ -226,10 +226,9 @@ export const HeaderPage = styled.main`
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 40px;
 
   div {
-    width: 79%;
+    width: 100%;
 
     hr {
       width: 100%;
@@ -262,5 +261,78 @@ export const HeaderPage = styled.main`
     svg {
       display: flex;
     }
+  }
+`;
+
+export const Calendar = styled.aside`
+  width: 380px;
+
+  .react-date-picker__wrapper {
+    padding-bottom: 0;
+    background: #232129;
+    border-radius: 10px;
+    padding: 4px 8px;
+    border: 2px solid #232129;
+    opacity: 1;
+  }
+
+  .react-date-picker-NavButton {
+    color: #999591 !important;
+  }
+
+  .react-date-picker-NavButton--prev {
+    right: auto;
+    left: 1.5em;
+    margin-right: 0;
+  }
+
+  .react-date-picker-Month {
+    border-collapse: separate;
+    border-spacing: 8px;
+    margin: 16px 0 0 0;
+    padding: 16px;
+    background-color: #28262e;
+    border-radius: 0 0 10px 10px;
+  }
+
+  .react-date-picker-Caption {
+    margin-bottom: 1em;
+    padding: 0 1em;
+    color: #f4ede8;
+
+    > div {
+      text-align: center;
+    }
+  }
+
+  .react-date-picker-Day {
+    width: 40px;
+    height: 40px;
+  }
+
+  .react-date-picker-Day--available:not(.react-date-picker-Day--outside) {
+    background: #3e3b47;
+    border-radius: 10px;
+    color: #fff;
+  }
+
+  .react-date-picker:not(.react-date-picker--interactionDisabled)
+    .react-date-picker-Day:not(.react-date-picker-Day--disabled):not(.react-date-picker-Day--selected):not(.react-date-picker-Day--outside):hover {
+    background: ${shade(0.2, '#3e3b47')};
+  }
+
+  .react-date-picker-Day--today {
+    font-weight: normal;
+  }
+
+  .react-date-picker-Day--disabled {
+    color: #666360 !important;
+    background: transparent !important;
+  }
+
+  .react-date-picker-Day--selected {
+    background: #ff9000 !important;
+    border-radius: 10px;
+    color: #232129 !important;
   }
 `;

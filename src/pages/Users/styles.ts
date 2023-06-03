@@ -226,10 +226,9 @@ export const HeaderPage = styled.main`
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 40px;
 
   div {
-    width: 79%;
+    width: 100%;
 
     hr {
       width: 100%;

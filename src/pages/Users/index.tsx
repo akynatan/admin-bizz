@@ -1,8 +1,6 @@
 /* eslint-disable no-alert */
 import React, { useEffect, useState } from 'react';
 
-import 'react-day-picker/lib/style.css';
-
 import { Link } from 'react-router-dom';
 import { HiPencil } from 'react-icons/hi';
 import { FiPlusCircle } from 'react-icons/fi';

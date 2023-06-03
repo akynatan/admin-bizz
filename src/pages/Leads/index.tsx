@@ -1,14 +1,22 @@
 /* eslint-disable no-alert */
 import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
 
-import 'react-day-picker/lib/style.css';
-
 import { Link } from 'react-router-dom';
 import { FiUpload, FiLink, FiArrowUpCircle } from 'react-icons/fi';
 import moment from 'moment';
-
+import DatePicker from 'react-date-picker';
+import 'react-date-picker/dist/DatePicker.css';
+import 'react-calendar/dist/Calendar.css';
+import { date } from 'yup';
 import MenuHeader from '../../components/MenuHeader';
-import { Container, Content, HeaderPage, AvatarInput } from './styles';
+import InputSample from '../../components/InputSample';
+import {
+  Container,
+  Content,
+  HeaderPage,
+  AvatarInput,
+  Calendar,
+} from './styles';
 import api from '../../services/api';
 import { Lead } from '../../types/Lead';
 import { useToast } from '../../hooks/toast';
@@ -18,6 +26,9 @@ const Leads: React.FC = () => {
   const { addToast } = useToast();
   const [isFetching, setIsFetching] = useState(true);
   const [leads, setLeads] = useState<Lead[]>([]);
+  const [leadsFiltered, setLeadsFiltered] = useState<Lead[]>([]);
+  const [leadNameFilter, setLeadNameFilter] = useState('');
+  const [dateFilter, setDateFilter] = useState<Date | null>(new Date());
   const { user } = useAuth();
 
   useEffect(() => {
@@ -25,11 +36,33 @@ const Leads: React.FC = () => {
       .get('/leads')
       .then(res => {
         setLeads(res.data);
+        setLeadsFiltered(res.data);
       })
       .finally(() => {
         setIsFetching(false);
       });
   }, []);
+
+  useEffect(() => {
+    let leadsFilteredToSet = leads;
+
+    if (leadNameFilter !== '') {
+      leadsFilteredToSet = leads.filter(lead =>
+        lead.name.toLowerCase().includes(leadNameFilter.toLowerCase()),
+      );
+    }
+
+    if (dateFilter) {
+      leadsFilteredToSet = leadsFilteredToSet.filter(lead => {
+        return (
+          moment(lead.created_at).format('DD/MM/YYYY') ===
+          moment(dateFilter).format('DD/MM/YYYY')
+        );
+      });
+    }
+
+    setLeadsFiltered(leadsFilteredToSet);
+  }, [leads, dateFilter, leadNameFilter]);
 
   const handleProofOfResidence = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -109,6 +142,64 @@ const Leads: React.FC = () => {
           </div>
         </HeaderPage>
 
+        <div
+          style={{
+            margin: '24px 0',
+            display: 'flex',
+            gap: 24,
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              gap: 8,
+              alignItems: 'center',
+            }}
+          >
+            <span
+              style={{
+                fontSize: 16,
+                fontWeight: 600,
+              }}
+            >
+              Nome:
+            </span>
+            <InputSample
+              name="lead_name"
+              containerStyle={{ width: 300, height: 20 }}
+              onChange={e => setLeadNameFilter(e.target.value)}
+            />
+          </div>
+          <div>
+            <div
+              style={{
+                display: 'flex',
+                gap: 8,
+                alignItems: 'center',
+              }}
+            >
+              <span
+                style={{
+                  fontSize: 16,
+                  fontWeight: 600,
+                }}
+              >
+                Data de cadastro:
+              </span>
+              <Calendar>
+                <DatePicker
+                  closeCalendar={false}
+                  onChange={(value: any) => {
+                    setDateFilter(value);
+                  }}
+                  format="dd-MM-y"
+                  value={dateFilter}
+                />
+              </Calendar>
+            </div>
+          </div>
+        </div>
+
         <table>
           <thead>
             <tr className="table100-head">
@@ -126,7 +217,7 @@ const Leads: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {leads.map(lead => {
+            {leadsFiltered.map(lead => {
               return (
                 <tr key={lead.id}>
                   <td className="column2">{lead.id}</td>
