@@ -7,7 +7,6 @@ import moment from 'moment';
 import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
-import { date } from 'yup';
 import MenuHeader from '../../components/MenuHeader';
 import InputSample from '../../components/InputSample';
 import {

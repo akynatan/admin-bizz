@@ -1,13 +1,10 @@
 import React, {
   InputHTMLAttributes,
-  useEffect,
   useRef,
   useState,
   useCallback,
 } from 'react';
 import { IconBaseProps } from 'react-icons';
-import { FiAlertCircle } from 'react-icons/fi';
-import { useField } from '@unform/core';
 
 import { Container } from './styles';
 
@@ -44,7 +41,12 @@ const InputSample: React.FC<InputProps> = ({
       data-testid="input-container"
     >
       {Icon && <Icon size={20} />}
-      <input {...rest} onFocus={handleInputFocus} onBlur={handleInputBlur} />
+      <input
+        name={name}
+        {...rest}
+        onFocus={handleInputFocus}
+        onBlur={handleInputBlur}
+      />
     </Container>
   );
 };
