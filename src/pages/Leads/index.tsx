@@ -2,7 +2,7 @@
 import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom';
-import { FiUpload, FiLink, FiArrowUpCircle } from 'react-icons/fi';
+import { FiUpload, FiLink, FiArrowUpCircle, FiBook } from 'react-icons/fi';
 import moment from 'moment';
 import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/DatePicker.css';
@@ -210,8 +210,12 @@ const Leads: React.FC = () => {
               <th>Comprovante de Identidade</th>
               <th>Created At</th>
               <th>Acessar RD</th>
-              {user.role === 'admin' ||
-                (user.role === 'manager' && <th>Solicitar Assinatura</th>)}
+              {(user.role === 'admin' || user.role === 'manager') && (
+                <>
+                  <th>Solicitar Assinatura</th>
+                  <th>Logs</th>
+                </>
+              )}
               <th> </th>
             </tr>
           </thead>
@@ -323,14 +327,30 @@ const Leads: React.FC = () => {
                       <FiLink />
                     </Link>
                   </td>
-                  {user.role === 'admin' ||
-                    (user.role === 'manager' && (
+                  {(user.role === 'admin' || user.role === 'manager') && (
+                    <>
                       <td>
                         <FiArrowUpCircle
                           onClick={() => retryDocument(lead?.id)}
                         />
                       </td>
-                    ))}
+                      <td>
+                        <Link
+                          style={{
+                            textDecoration: 'none',
+                            fontWeight: 600,
+                            color: '#ff9000',
+                          }}
+                          target="_blank"
+                          to={{
+                            pathname: `lead/${lead.lead_id}/logs`,
+                          }}
+                        >
+                          <FiBook />
+                        </Link>
+                      </td>
+                    </>
+                  )}
                 </tr>
               );
             })}

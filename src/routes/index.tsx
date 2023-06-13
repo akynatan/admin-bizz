@@ -11,6 +11,7 @@ import ResetPassword from '../pages/ResetPassword';
 import Profile from '../pages/Profile';
 import Dashboard from '../pages/Dashboard';
 import Leads from '../pages/Leads';
+import LeadLog from '../pages/LeadLog';
 import AddUser from '../pages/AddUser';
 import Users from '../pages/Users';
 import EditUser from '../pages/EditUser';
@@ -29,6 +30,7 @@ const Routes: React.FC = () => (
     <Route path="/users" component={Users} isPrivate />
     <Route path="/user/add" component={AddUser} isPrivate />
     <Route path="/user/:id" component={EditUser} isPrivate />
+    <Route path="/lead/:id/logs" component={LeadLog} isPrivate />
   </Switch>
 );
 

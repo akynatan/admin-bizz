@@ -3,3 +3,4 @@ export * from './City';
 export * from './State';
 export * from './Option';
 export * from './User';
+export * from './LeadLog';
