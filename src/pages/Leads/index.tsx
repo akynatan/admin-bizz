@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable no-alert */
 import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
 
@@ -241,6 +242,8 @@ const Leads: React.FC = () => {
                       >
                         {lead.document_name}
                       </Link>
+                    ) : !(user.role === 'admin' || user.role === 'manager') ? (
+                      '-'
                     ) : (
                       <FiArrowUpCircle
                         onClick={() => verifyContractSigned(lead?.id)}
