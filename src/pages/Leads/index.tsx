@@ -110,6 +110,18 @@ const Leads: React.FC = () => {
     await api.post(`/leads/${lead_id}/verifycontractsigned`);
   }, []);
 
+  const retryDocument = useCallback(
+    lead_id => {
+      api.post(`/leads/${lead_id}/create`).then(() => {
+        addToast({
+          type: 'success',
+          title: 'Novo documento criado!',
+        });
+      });
+    },
+    [addToast],
+  );
+
   const createCardHubSoft = useCallback(
     lead_id => {
       api.post(`/leads/${lead_id}/createcardhub`).then(() => {
