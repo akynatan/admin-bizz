@@ -106,9 +106,29 @@ const Leads: React.FC = () => {
     [addToast],
   );
 
-  const verifyContractSigned = useCallback(async lead_id => {
-    await api.post(`/leads/${lead_id}/verifycontractsigned`);
-  }, []);
+  const verifyContractSigned = useCallback(
+    async lead_id => {
+      try {
+        const response = await api.post(
+          `/leads/${lead_id}/verifycontractsigned`,
+        );
+
+        if (response.data) {
+          addToast({
+            type: 'success',
+            title: 'Documento assinado e feito o upload!',
+          });
+        }
+      } catch (err: any) {
+        addToast({
+          type: 'error',
+          title: 'Erro na verificação/upload',
+          description: err.response?.data?.error,
+        });
+      }
+    },
+    [addToast],
+  );
 
   const retryDocument = useCallback(
     lead_id => {
@@ -256,10 +276,12 @@ const Leads: React.FC = () => {
                       </Link>
                     ) : !(user.role === 'admin' || user.role === 'manager') ? (
                       '-'
-                    ) : (
+                    ) : lead.card_id ? (
                       <FiArrowUpCircle
                         onClick={() => verifyContractSigned(lead?.id)}
                       />
+                    ) : (
+                      '-'
                     )}
                   </td>
                   <td>
