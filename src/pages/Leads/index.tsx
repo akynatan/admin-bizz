@@ -276,12 +276,10 @@ const Leads: React.FC = () => {
                       </Link>
                     ) : !(user.role === 'admin' || user.role === 'manager') ? (
                       '-'
-                    ) : lead.card_id ? (
+                    ) : (
                       <FiArrowUpCircle
                         onClick={() => verifyContractSigned(lead?.id)}
                       />
-                    ) : (
-                      '-'
                     )}
                   </td>
                   <td>
