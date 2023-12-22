@@ -74,7 +74,15 @@ const Leads: React.FC = () => {
       if (files) {
         data.append('file', files[0]);
 
-        api.patch(`/leads/${lead_id}/proofofresidence`, data).then(() => {
+        api.patch(`/leads/${lead_id}/proofofresidence`, data).then(res => {
+          const leadUpdated = res.data;
+
+          setLeads(leadsAntigos => {
+            return leadsAntigos.map(lead =>
+              lead.id === leadUpdated.id ? leadUpdated : lead,
+            );
+          });
+
           addToast({
             type: 'success',
             title: 'Comprovante de Residência alterado!',
@@ -95,7 +103,15 @@ const Leads: React.FC = () => {
       if (files) {
         data.append('file', files[0]);
 
-        api.patch(`/leads/${lead_id}/proofofidentity`, data).then(() => {
+        api.patch(`/leads/${lead_id}/proofofidentity`, data).then(res => {
+          const leadUpdated = res.data;
+
+          setLeads(leadsAntigos => {
+            return leadsAntigos.map(lead =>
+              lead.id === leadUpdated.id ? leadUpdated : lead,
+            );
+          });
+
           addToast({
             type: 'success',
             title: 'Comprovante de Identidade alterado!',
@@ -114,6 +130,14 @@ const Leads: React.FC = () => {
         );
 
         if (response.data) {
+          const leadUpdated = response.data;
+
+          setLeads(leadsAntigos => {
+            return leadsAntigos.map(lead =>
+              lead.id === leadUpdated.id ? leadUpdated : lead,
+            );
+          });
+
           addToast({
             type: 'success',
             title: 'Documento assinado e feito o upload!',
@@ -144,7 +168,15 @@ const Leads: React.FC = () => {
 
   const createCardHubSoft = useCallback(
     lead_id => {
-      api.post(`/leads/${lead_id}/createcardhub`).then(() => {
+      api.post(`/leads/${lead_id}/createcardhub`).then((res): any => {
+        const leadUpdated = res.data;
+
+        setLeads(leadsAntigos => {
+          return leadsAntigos.map(lead =>
+            lead.id === leadUpdated.id ? leadUpdated : lead,
+          );
+        });
+
         addToast({
           type: 'success',
           title: 'CardID criado com sucesso!',
