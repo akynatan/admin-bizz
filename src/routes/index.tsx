@@ -15,6 +15,9 @@ import LeadLog from '../pages/LeadLog';
 import AddUser from '../pages/AddUser';
 import Users from '../pages/Users';
 import EditUser from '../pages/EditUser';
+import Plans from '../pages/Plans';
+import AddPlan from '../pages/AddPlan';
+import EditPlan from '../pages/EditPlan';
 
 const Routes: React.FC = () => (
   <Switch>
@@ -31,6 +34,9 @@ const Routes: React.FC = () => (
     <Route path="/user/add" component={AddUser} isPrivate />
     <Route path="/user/:id" component={EditUser} isPrivate />
     <Route path="/lead/:id/logs" component={LeadLog} isPrivate />
+    <Route path="/plans" component={Plans} isPrivate />
+    <Route path="/plan/add" component={AddPlan} isPrivate />
+    <Route path="/plan/:id" component={EditPlan} isPrivate />
   </Switch>
 );
 
