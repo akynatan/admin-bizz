@@ -9,6 +9,7 @@ import { Container, Content, HeaderPage } from './styles';
 import api from '../../services/api';
 import { User } from '../../types/User';
 import Button from '../../components/Button';
+import { useAuth } from '../../hooks/auth';
 
 const roles = {
   admin: 'Admin',

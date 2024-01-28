@@ -9,6 +9,7 @@ import { Container, Content, HeaderPage } from './styles';
 import api from '../../services/api';
 import { Plan } from '../../types/Plan';
 import Button from '../../components/Button';
+import { useAuth } from '../../hooks/auth';
 
 const Plans: React.FC = () => {
   const [isFetching, setIsFetching] = useState(true);
