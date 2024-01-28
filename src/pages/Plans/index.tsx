@@ -35,7 +35,7 @@ const Plans: React.FC = () => {
             <h1>Lista de Planos</h1>
             <hr />
           </div>
-          <Link to="plan/add">
+          <Link to="plans/add">
             <Button type="button">Adicionar Plano</Button>
             <FiPlusCircle />
           </Link>

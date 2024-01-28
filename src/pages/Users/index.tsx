@@ -42,7 +42,7 @@ const Users: React.FC = () => {
             <h1>Lista de Users</h1>
             <hr />
           </div>
-          <Link to="user/add">
+          <Link to="users/add">
             <Button type="button">Adicionar Cliente</Button>
             <FiPlusCircle />
           </Link>

@@ -36,12 +36,12 @@ const Routes: React.FC = () => {
       <Route path="/leads" component={Leads} isPrivate />
       {userCurrent.role === 'admin' && (
         <>
-          <Route path="/users" component={Users} isPrivate />
-          <Route path="/user/add" component={AddUser} isPrivate />
+          <Route path="/users" exact component={Users} isPrivate />
+          <Route path="/users/add" component={AddUser} isPrivate />
           <Route path="/user/:id" component={EditUser} isPrivate />
           <Route path="/lead/:id/logs" component={LeadLog} isPrivate />
-          <Route path="/plans" component={Plans} isPrivate />
-          <Route path="/plan/add" component={AddPlan} isPrivate />
+          <Route path="/plans" exact component={Plans} isPrivate />
+          <Route path="/plans/add" component={AddPlan} isPrivate />
           <Route path="/plan/:id" component={EditPlan} isPrivate />
         </>
       )}
