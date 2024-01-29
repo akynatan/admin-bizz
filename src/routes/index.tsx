@@ -34,7 +34,7 @@ const Routes: React.FC = () => {
       <Route path="/" exact component={Dashboard} isPrivate />
       <Route path="/profile" component={Profile} isPrivate />
       <Route path="/leads" component={Leads} isPrivate />
-      {userCurrent.role === 'admin' && (
+      {userCurrent?.role === 'admin' && (
         <>
           <Route path="/users" exact component={Users} isPrivate />
           <Route path="/users/add" component={AddUser} isPrivate />
